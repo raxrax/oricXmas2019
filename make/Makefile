@@ -4,9 +4,9 @@
 #) |_| |__,|_,_|_|___|___|
 #)         raxiss (c) 2019
 
-PROJECT                 := xmas2019
+PROJECT                 := oricXmas2019
 PROJECT_DIR             := $(shell pwd)
-PROJECT_LABEL           := xmas2019
+PROJECT_LABEL           := oricXmas2019
 
 # # # Only for FlopyBuilder
 # PROJECT_DSK           := $(PROJECT).dsk
