@@ -17,7 +17,7 @@ CALL %OSDK%\bin\make.bat %OSDKFILE%
 
 echo %osdk%
 
-%OSDK%\bin\taptap ren build\%OSDKNAME%.tap "xmass2019" 0
+%OSDK%\bin\taptap ren build\%OSDKNAME%.tap "xmas2019" 0
 
 CALL %OSDK%\bin\execute.bat
 

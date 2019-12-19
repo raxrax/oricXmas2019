@@ -3,5 +3,5 @@
 ::
 :: Set the build paremeters
 ::
-SET OSDKNAME=xmass
-SET OSDKFILE=main xmass mymplayer song 
+SET OSDKNAME=xmas2019
+SET OSDKFILE=main xmas mymplayer song 

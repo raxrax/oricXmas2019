@@ -1,3 +1,10 @@
+/*              _         
+**  ___ ___ _ _|_|___ ___ 
+** |  _| .'|_'_| |_ -|_ -|
+** |_| |__,|_,_|_|___|___|
+**         raxiss (c) 2019
+*/
+
 #include <stdio.h>
 #include <lib.h>
 
@@ -168,31 +175,71 @@ unsigned int addr;
 
 unsigned char multi40[] = {0, 40, 2 * 40, 3 * 40, 4 * 40, 5 * 40, 6 * 40, 7 * 40, 8 * 40, 9 * 40, 10 * 40, 11 * 40, 12 * 40, 13 * 40};
 
-char msg[] = "                                          \x7f \x7f \x7f   May this festive season sparkle and shine, may all of your wishes and dreams come true, and may you feel this happiness all year round. May this wonderful time of the year touch your heart in a special way. During this festive season of giving, let us take time to slow down and enjoy the simple things.  Wishing you much happiness not just today, but throughout the New Year. Merry Christmas!   \x7f \x7f \x7f                                     ";
+char msg[] = 
+"                                          \x7f \x7f \x7f"
+"   May this festive season sparkle and shine, may all of your "
+"wishes and dreams come true, and may you feel this happiness all "
+"year round. May this wonderful time of the year touch your heart "
+"in a special way. During this festive season of giving, let us take "
+"time to slow down and enjoy the simple things.  Wishing you much "
+"happiness not just today, but throughout the New Year. Merry Christmas!   \x7f \x7f \x7f"
+"                                    raxiss (c) 2019                                     ";
 
 unsigned int scrollerPos = 0;
 unsigned char scrollerCounter = 0;
 
+static char* logo = 
+"                                        "
+"                                        "
+"                                        "
+"                                        "
+"                                        "
+"                                        "
+"                                        "
+"                                        "
+"                       .__              "
+"  ____________  ___  __|__| _____ _____ "
+"  \\_  __ \\__  \\ \\  \\/  /  |/ ___// ___/ "
+"   |  | \\// __ \\_>    <|  |\\__ \\ \\__ \\  "
+"   |__|  (____  /__/\\_ \\__/___  >___  > "
+"              \\/      \\/      \\/    \\/  "
+"                                        "
+"                presents                "
+"                                        "
+"                                        "
+"                                        "
+"                                        ";
+
 main()
 {
+    text();
+    paper(0);
+    ink(7);
+
+    //hide cursor
+    pk(0x26a, 10);
+
+    //font
+    memcpy((void *)0xb500, (void *)charset, sizeof(charset));
+    
+    memcpy((void *)(0xbb80), (void *)logo, 40*20);
+    for (addr = 0; addr < 30000; ++addr);
+        
     //invert msg
     for (addr = 0; addr < sizeof(msg); ++addr)
     {
         msg[addr] = msg[addr] | 128;
     }
 
-    text();
-    paper(0);
-    ink(7);
-
-    //font
-    memcpy((void *)0xb500, (void *)charset, sizeof(charset));
-
+    // supress ugly lines during hires switch
+    memset((void *)0x9900, 0, 0xc000-0x9900);
     hires();
-
+    //hires font
+    memcpy((void *)0x9900, (void *)charset, sizeof(charset));
+    
     //hide cursor
     pk(0x26a, 10);
-
+    
     //set scroller bg & double text
     memset(SCROLLER_START_ADDR - 40, 23, 40 * 3);
     pk(SCROLLER_START_ADDR, 10 | 128);
