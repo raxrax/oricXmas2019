@@ -1,5 +1,5 @@
-#)              _         
-#)  ___ ___ _ _|_|___ ___ 
+#)              _
+#)  ___ ___ _ _|_|___ ___
 #) |  _| .'|_'_| |_ -|_ -|
 #) |_| |__,|_,_|_|___|___|
 #)         raxiss (c) 2019
@@ -23,17 +23,17 @@ CPU                     := 6502
 # # # Toolchain OSDK or CC65
 TOOLCHAIN               := OSDK
 
-# # # 
+# # #
 START_ADDRESS           := $(shell echo $$((0x0600)))
 
 ATAPS                   :=
 BTAPS                   :=
-CTAPS                   := $(PROJECT) 
-OTAPS                   := 
+CTAPS                   := $(PROJECT)
+OTAPS                   :=
 
 TAPS                    := $(addsuffix .tap,$(ATAPS) $(BTAPS) $(CTAPS) $(OTAPS))
 
-# 
+#
 
 $(PROJECT)_SRC          := main.c xmas.s mymplayer.s song.s
 $(PROJECT)_AUTORUN      := 1
@@ -41,7 +41,7 @@ $(PROJECT)_ADDRESS      := $(START_ADDRESS)
 $(PROJECT)_ACPP         := 0
 
 #
-include Makefile.local
+include                 ${HOME}/.oric/Makefile.local
 
 OSDK                    := $(OSDK_DIR)
 OSDK_OPT                := 0
@@ -51,9 +51,9 @@ CC65_ALIGNED            := 0
 EMU                     := ./oricutron
 EMUDIR                  := $(EMUL_DIR)
 EMUARG                  := -ma
-EMUARG                  += --serial none 
+EMUARG                  += --serial none
 EMUARG                  += --vsynchack off
-EMUARG                  += -s $(PROJECT_DIR)/$(PROJECT).sym 
+EMUARG                  += -s $(PROJECT_DIR)/$(PROJECT).sym
 EMUARG                  += -r :$(PROJECT_DIR)/$(PROJECT).brk
 EMUARG                  += #-r $(START_ADDRESS)
 
